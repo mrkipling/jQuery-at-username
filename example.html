@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>jQuery at-username plugin example</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="at-username/jquery.at-username.css">
+
+    <style>
+      /* reset */
+
+      html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, q pre,
+      a, em, font, img, strong, dl, dt, dd, ol, ul, li, form, label,
+      table tbody, tfoot, thead, tr, th, td
+      {
+        background: transparent;
+        border: 0;
+        font-size: 100%;
+        margin: 0;
+        outline: 0;
+        padding: 0;
+        vertical-align: baseline;
+      }
+
+      body    { background-color: #fff; color: #333; font-family: Arial, Helvetica, Sans-serif; font-size: 12px; line-height: 18px; padding: 20px; }
+      a       { color: #cb5353; text-decoration: underline; }
+      a:hover { color: #ff5353; text-decoration: underline; }
+      ol, ul  { list-style: none; }
+      blockquote, q { quotes: none; }
+      :focus  { outline: 0; }
+      table   { border-collapse: collapse; border-spacing: 0; }
+
+      textarea, input, select
+      {
+        font-family: Arial, Helvetica, Sans-serif;
+        font-size: 1em;
+      }
+
+      /* page styling */
+
+      h1 { font-size: 18px; margin-bottom: 30px; }
+      h2 { font-size: 14px; margin: 30px 0 10px; }
+      .reply { width: 300px; }
+      .reply textarea { border: 1px solid #ccc; width: 290px; border-radius: 2px; padding: 4px; }
+    </style>
+
+  </head>
+
+  <body>
+
+    <h1>jQuery at-username plugin example</h1>
+
+    <div class="autocompleteUsernameContainer">
+
+      <h2>Example comments</h2>
+
+      <ul>
+        <li>
+          <a href="#" class="username">mrkipling</a> said:
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </li>
+        <li>
+          <a href="#" class="username">Esteban.Hernandez</a> said:
+          Etiam malesuada nisi lobortis justo ornare hendrerit. Suspendisse eget bibendum enim.
+        </li>
+        <li>
+          <a href="#" class="username">serverhamster</a> said:
+          Aenean sit amet velit non turpis blandit dignissim.
+        </li>
+        <li>
+          <a href="#" class="username">digiwolf</a> said:
+          Maecenas sed orci quam.
+        </li>
+        <li>
+          <a href="#" class="username">SystemGiraffe</a> said:
+          Aenean accumsan metus vitae tellus ullamcorper.
+        </li>
+        <li>
+          <a href="#" class="username">finance-ape</a> said:
+          Duis pellentesque congue odio.
+        </li>
+        <li>
+          <a href="#" class="username">eurogorilla</a> said:
+          Donec consequat facilisis tortor, sed condimentum erat congue.
+        </li>
+      </ul>
+
+      <h2>Example reply box</h2>
+
+      <div class="reply">
+        <textarea class="at-username" rows="4" cols="40"></textarea>
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="at-username/jquery.at-username.js"></script>
+    <script>
+
+      $(document).ready(function() {
+        $('textarea.at-username').autocompleteUsernames();
+      });
+
+    </script>
+
+  </body>
+
+</html>

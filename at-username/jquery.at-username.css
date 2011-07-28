@@ -3,9 +3,17 @@
   very basic styling for testing purposes
 */
 
+.username_autocomplete
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .username_autocomplete li
 {
   background-color: #ddd;
+  margin: 0;
   padding: 2px 5px !important;
 }
 
