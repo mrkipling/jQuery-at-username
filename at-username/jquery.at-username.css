@@ -1,0 +1,15 @@
+/*
+  jQuery at-username
+  very basic styling for testing purposes
+*/
+
+.username_autocomplete li
+{
+  background-color: #ddd;
+  padding: 2px 5px !important;
+}
+
+.username_autocomplete li.active
+{
+  background-color: #c9c9c9;
+}
