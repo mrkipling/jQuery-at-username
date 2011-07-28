@@ -23,7 +23,7 @@
         vertical-align: baseline;
       }
 
-      body    { background-color: #fff; color: #333; font-family: Arial, Helvetica, Sans-serif; font-size: 12px; line-height: 18px; padding: 20px; }
+      body    { background-color: #eee; color: #333; font-family: Arial, Helvetica, Sans-serif; font-size: 12px; line-height: 18px; padding: 20px; }
       a       { color: #cb5353; text-decoration: underline; }
       a:hover { color: #ff5353; text-decoration: underline; }
       ol, ul  { list-style: none; }
@@ -39,61 +39,65 @@
 
       /* page styling */
 
-      h1 { font-size: 18px; margin-bottom: 30px; }
+      #container { background-color: #fff; width: 800px; padding: 40px; margin: 0 auto; border-radius: 2px; box-shadow: #ccc 2px 2px 5px; }
+      h1 { font-size: 24px; margin: -10px 0 10px; padding-bottom: 20px; border-bottom: 1px dotted #ccc; }
       h2 { font-size: 14px; margin: 30px 0 10px; }
-      h2 + p { margin: -5px 0 15px; }
-      .reply { width: 300px; }
-      .reply textarea { border: 1px solid #ccc; width: 290px; border-radius: 2px; padding: 4px; }
+      .at-username-container .instructions { margin: -5px 0 15px; }
+      .at-username-container .comments, .at-username-container .reply { margin-left: 20px; }
+      .at-username-container .reply { width: 300px; min-height: 200px; }
+      .at-username-container .reply textarea { border: 1px solid #ccc; width: 290px; border-radius: 2px; padding: 4px; }
     </style>
 
   </head>
 
   <body>
+    <div id="container">
 
-    <h1>jQuery at-username plugin example</h1>
+      <h1>jQuery at-username plugin example</h1>
 
-    <div class="at-username-container">
+      <div class="at-username-container">
 
-      <h2>Example comments</h2>
+        <h2>Example comments</h2>
 
-      <ul class="comments">
-        <li>
-          <a href="#" class="username">mrkipling</a> said:
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </li>
-        <li>
-          <a href="#" class="username">Esteban.Hernandez</a> said:
-          Etiam malesuada nisi lobortis justo ornare hendrerit. Suspendisse eget bibendum enim.
-        </li>
-        <li>
-          <a href="#" class="username">serverhamster</a> said:
-          Aenean sit amet velit non turpis blandit dignissim.
-        </li>
-        <li>
-          <a href="#" class="username">digiwolf</a> said:
-          Maecenas sed orci quam.
-        </li>
-        <li>
-          <a href="#" class="username">SystemGiraffe</a> said:
-          Aenean accumsan metus vitae tellus ullamcorper.
-        </li>
-        <li>
-          <a href="#" class="username">finance-ape</a> said:
-          Duis pellentesque congue odio.
-        </li>
-        <li>
-          <a href="#" class="username">eurogorilla</a> said:
-          Donec consequat facilisis tortor, sed condimentum erat congue.
-        </li>
-      </ul>
+        <ul class="comments">
+          <li>
+            <a href="#" class="username">mrkipling</a> said:
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </li>
+          <li>
+            <a href="#" class="username">Esteban.Hernandez</a> said:
+            Etiam malesuada nisi lobortis justo ornare hendrerit. Suspendisse eget bibendum enim.
+          </li>
+          <li>
+            <a href="#" class="username">serverhamster</a> said:
+            Aenean sit amet velit non turpis blandit dignissim.
+          </li>
+          <li>
+            <a href="#" class="username">digiwolf</a> said:
+            Maecenas sed orci quam.
+          </li>
+          <li>
+            <a href="#" class="username">SystemGiraffe</a> said:
+            Aenean accumsan metus vitae tellus ullamcorper.
+          </li>
+          <li>
+            <a href="#" class="username">finance-ape</a> said:
+            Duis pellentesque congue odio.
+          </li>
+          <li>
+            <a href="#" class="username">eurogorilla</a> said:
+            Donec consequat facilisis tortor, sed condimentum erat congue.
+          </li>
+        </ul>
 
-      <h2>Example reply box</h2>
-      <p>Type '@' at any position in the textarea to start autocompleting usernames.</p>
+        <h2>Example reply box</h2>
+        <p class="instructions">Type '@' at any position in the textarea to start autocompleting usernames.</p>
 
-      <div class="reply">
-        <textarea class="at-username" rows="4" cols="40"></textarea>
+        <div class="reply">
+          <textarea class="at-username" rows="4" cols="40"></textarea>
+        </div>
+
       </div>
-
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
