@@ -6,7 +6,7 @@ jQuery at-username
 Autocomplete usernames when typing @
 
 Usage: apply to a textarea:
-  $('textarea').autocompleteUsernames(settings);
+  $('textarea').atUsername(settings);
 
 Settings (optional):
 
@@ -19,7 +19,7 @@ Settings (optional):
       on that page that also have xhrUsernames specified; the list of
       usernames will only ever be loaded in once.
 
-  containerSelector (default='.autocompleteUsernameContainer'):
+  containerSelector (default='.at-username-container'):
     description: string containing a selector
       If specificied, the element referenced in this selector (which has to be
       a parent element of the textarea this is applied to) will be searched
@@ -107,7 +107,7 @@ $(document).ready(function() {
   // only returns first 5 results
 
   var createUsernameAutocomplete = function(users) {
-    var username_list = $('<ul class="username_autocomplete"></ul>');
+    var username_list = $('<ul class="at-username-autocomplete"></ul>');
 
     for (var i = 0; i < users.length; i++) {
       if (i === 5) {
@@ -123,7 +123,7 @@ $(document).ready(function() {
   // remove autocomplete dropdown from conatiner
 
   var removeUsernameAutocomplete = function(container) {
-    container.find('.username_autocomplete').remove();
+    container.find('.at-username-autocomplete').remove();
     container.find('textarea').removeClass('autocomplete_active').removeData('ac_start').scrollTop(9999); // scrollTop to fix Firefox bug
 
     return true;
@@ -131,12 +131,12 @@ $(document).ready(function() {
 
   // the main bit
 
-  $.fn.autocompleteUsernames = function(userSettings) {
+  $.fn.atUsername = function(userSettings) {
 
     // settings
 
     var settings = {
-      containerSelector: '.autocompleteUsernameContainer',
+      containerSelector: '.at-username-container',
       usernameSelector: '.username',
       xhrUsernames: null
     };
@@ -185,14 +185,14 @@ $(document).ready(function() {
 
         username_list = createUsernameAutocomplete(users);
 
-        if (textarea_wrapper.find('.username_autocomplete').length > 0) {
-          textarea_wrapper.find('.username_autocomplete').replaceWith(username_list);
+        if (textarea_wrapper.find('.at-username-autocomplete').length > 0) {
+          textarea_wrapper.find('.at-username-autocomplete').replaceWith(username_list);
         } else {
           textarea_wrapper.append(username_list);
         }
 
       } else if (e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13 || e.keyCode === 32) { // up, down, enter, space
-        username_list = textarea_wrapper.find('.username_autocomplete');
+        username_list = textarea_wrapper.find('.at-username-autocomplete');
 
         if (username_list.length === 0) {
           return;
@@ -258,7 +258,7 @@ $(document).ready(function() {
         var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, (settings.xhrUsernames !== null));
         var search_results = searchUsernameList(usernames, search_term);
         username_list = createUsernameAutocomplete(search_results);
-        textarea_wrapper.find('.username_autocomplete').replaceWith(username_list);
+        textarea_wrapper.find('.at-username-autocomplete').replaceWith(username_list);
       }
 
     });

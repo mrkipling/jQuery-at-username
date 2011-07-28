@@ -3,21 +3,21 @@
   very basic styling for testing purposes
 */
 
-.username_autocomplete
+.at-username-autocomplete
 {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.username_autocomplete li
+.at-username-autocomplete li
 {
   background-color: #ddd;
   margin: 0;
   padding: 2px 5px !important;
 }
 
-.username_autocomplete li.active
+.at-username-autocomplete li.active
 {
   background-color: #c9c9c9;
 }
