@@ -80,7 +80,7 @@ $(document).ready(function() {
   // takes an array of usernames and creates a username automcompletion HTML element
   // only returns first numResults results
 
-  var createUsernameAutocomplete = function(textarea, users, numResults) {
+  var createUsernameAutocomplete = function(textarea, container, users, numResults) {
     var username_list = $('<ul id="at-username-autocomplete"></ul>');
 
     username_list.css({
@@ -96,6 +96,13 @@ $(document).ready(function() {
     }
 
     username_list.find('li:first-child').addClass('active');
+
+    username_list.find('li').click(function() {
+      textarea.val(textarea.val().substring(0, textarea.data('ac_start') + 1) + $(this).text() + ' ');
+      removeUsernameAutocomplete(container);
+      return false;
+    });
+
     return username_list;
   };
 
@@ -163,7 +170,7 @@ $(document).ready(function() {
           return true;
         }
 
-        username_list = createUsernameAutocomplete(textarea, users, settings.numResults);
+        username_list = createUsernameAutocomplete(textarea, textarea.closest(settings.containerSelector), users, settings.numResults);
         ddl = $('#at-username-autocomplete');
 
         if (ddl.length > 0) {
@@ -238,7 +245,7 @@ $(document).ready(function() {
         search_term = search_term.toLowerCase();
         var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, (settings.xhrUsernames !== null));
         var search_results = searchUsernameList(usernames, search_term);
-        username_list = createUsernameAutocomplete(textarea, search_results, settings.numResults);
+        username_list = createUsernameAutocomplete(textarea, textarea.closest(settings.containerSelector), search_results, settings.numResults);
         $('#at-username-autocomplete').replaceWith(username_list);
       }
 
