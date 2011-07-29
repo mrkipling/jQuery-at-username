@@ -10,15 +10,6 @@ Usage: apply to a textarea:
 
 Settings (optional):
 
-  xhrUsernames (default=null):
-    description: string (URL)
-      If exists, this URL will be queried. It should return JSON in the
-      following format:
-        { usernames: [ 'username1', 'username2' ... ] }
-      These usernames will be searchable by all textareas using the plugin
-      on that page that also have xhrUsernames specified; the list of
-      usernames will only ever be loaded in once.
-
   containerSelector (default='.at-username-container'):
     description: string containing a selector
       If specificied, the element referenced in this selector (which has to be
@@ -30,6 +21,19 @@ Settings (optional):
     description: string containing a selector
       If settings.containerSelector is specified, this is the class that should
       be given to usernames within that container.
+
+  xhrUsernames (default=null):
+    description: string (URL)
+      If exists, this URL will be queried. It should return JSON in the
+      following format:
+        { usernames: [ 'username1', 'username2' ... ] }
+      These usernames will be searchable by all textareas using the plugin
+      on that page that also have xhrUsernames specified; the list of
+      usernames will only ever be loaded in once.
+
+  numResults (default=5):
+    description: int
+      The number of results to display in the autocomplete dropdown.
 */
 
 // case insensitive sort
