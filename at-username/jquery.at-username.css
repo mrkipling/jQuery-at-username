@@ -3,26 +3,24 @@
   basic styling; you might want to use this as a starting point
 */
 
-.at-username-autocomplete
+#at-username-autocomplete
 {
   border: 1px solid #ddd;
   list-style-type: none;
   margin: 0;
   padding: 0;
-
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
+  position: absolute;
 }
 
-.at-username-autocomplete li
+#at-username-autocomplete li
 {
   background-color: #fff;
   margin: 0;
+  min-width: 150px;
   padding: 2px 5px !important;
 }
 
-.at-username-autocomplete li.active
+#at-username-autocomplete li.active
 {
   background-color: #e3e3e3;
 }

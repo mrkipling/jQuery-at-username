@@ -80,8 +80,13 @@ $(document).ready(function() {
   // takes an array of usernames and creates a username automcompletion HTML element
   // only returns first numResults results
 
-  var createUsernameAutocomplete = function(users, numResults) {
-    var username_list = $('<ul class="at-username-autocomplete"></ul>');
+  var createUsernameAutocomplete = function(textarea, users, numResults) {
+    var username_list = $('<ul id="at-username-autocomplete"></ul>');
+
+    username_list.css({
+      top: textarea.offset().top + textarea.outerHeight() - 1,
+      left: textarea.offset().left
+    });
 
     for (var i = 0; i < users.length; i++) {
       if (i === numResults) {
@@ -97,7 +102,7 @@ $(document).ready(function() {
   // remove autocomplete dropdown from container
 
   var removeUsernameAutocomplete = function(container) {
-    container.find('.at-username-autocomplete').remove();
+    $('#at-username-autocomplete').remove();
     container.find('textarea').removeClass('autocomplete_active').removeData('ac_start').scrollTop(9999); // scrollTop to fix Firefox bug
     return true;
   };
@@ -140,6 +145,7 @@ $(document).ready(function() {
       var textarea = $(this);
       var textarea_wrapper = textarea.parent();
       var username_list;
+      var ddl;
 
       if (e.keyCode === 16) { // shift
         return;
@@ -157,18 +163,19 @@ $(document).ready(function() {
           return true;
         }
 
-        username_list = createUsernameAutocomplete(users, settings.numResults);
+        username_list = createUsernameAutocomplete(textarea, users, settings.numResults);
+        ddl = $('#at-username-autocomplete');
 
-        if (textarea_wrapper.find('.at-username-autocomplete').length > 0) {
-          textarea_wrapper.find('.at-username-autocomplete').replaceWith(username_list);
+        if (ddl.length > 0) {
+          ddl.replaceWith(username_list);
         } else {
-          textarea_wrapper.append(username_list);
+          $('body').append(username_list);
         }
 
       } else if (e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13 || e.keyCode === 32) { // up, down, enter, space
-        username_list = textarea_wrapper.find('.at-username-autocomplete');
+        ddl = $('#at-username-autocomplete');
 
-        if (username_list.length === 0) {
+        if (ddl.length === 0) {
           return;
         }
 
@@ -176,26 +183,26 @@ $(document).ready(function() {
 
         switch (e.keyCode) {
         case 38: // up
-          active = username_list.find('li.active');
+          active = ddl.find('li.active');
           if (active.length > 0) {
             active.removeClass('active').prev().addClass('active');
           } else {
-            username_list.find('li:last-child').addClass('active');
+            ddl.find('li:last-child').addClass('active');
           }
           return false;
 
         case 40: // down
-          active = username_list.find('li.active');
+          active = ddl.find('li.active');
           if (active.length > 0) {
             active.removeClass('active').next().addClass('active');
           } else {
-            username_list.find('li:first-child').addClass('active');
+            ddl.find('li:first-child').addClass('active');
           }
           return false;
 
         case 13: // enter
         case 32: // space
-          active = username_list.find('li.active');
+          active = ddl.find('li.active');
           if (active.length > 0) {
             textarea.val(textarea.val().substring(0, textarea.data('ac_start') + 1) + active.text() + ' ');
           }
@@ -231,8 +238,8 @@ $(document).ready(function() {
         search_term = search_term.toLowerCase();
         var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, (settings.xhrUsernames !== null));
         var search_results = searchUsernameList(usernames, search_term);
-        username_list = createUsernameAutocomplete(search_results, settings.numResults);
-        textarea_wrapper.find('.at-username-autocomplete').replaceWith(username_list);
+        username_list = createUsernameAutocomplete(textarea, search_results, settings.numResults);
+        $('#at-username-autocomplete').replaceWith(username_list);
       }
 
     });
