@@ -12,7 +12,7 @@ Settings (optional):
 
   containerSelector (default='.at-username-container'):
     description: string containing a selector
-      If specificied, the element referenced in this selector (which has to be
+      If specificied, the element referenced in this selector (which should be
       a parent element of the textarea this is applied to) will be searched
       for all elements with a class of settings.usernameSelector; the $.text()
       value of these elements will be added to the searchable list of usernames.
@@ -20,7 +20,7 @@ Settings (optional):
   usernameSelector (default='.username'):
     description: string containing a selector
       If settings.containerSelector is specified, this is the class that should
-      be given to usernames within that container.
+      be given to elememts within that container which contain usernames.
 
   xhrUsernames (default=null):
     description: string (URL)
@@ -30,6 +30,7 @@ Settings (optional):
       These usernames will be searchable by all textareas using the plugin
       on that page that also have xhrUsernames specified; the list of
       usernames will only ever be loaded in once.
+      For example, you could load in the logged-in user's friends list.
 
   numResults (default=5):
     description: int

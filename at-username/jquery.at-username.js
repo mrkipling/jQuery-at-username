@@ -4,36 +4,6 @@
 
 jQuery at-username
 Autocomplete usernames when typing @
-
-Usage: apply to a textarea:
-  $('textarea').atUsername(settings);
-
-Settings (optional):
-
-  containerSelector (default='.at-username-container'):
-    description: string containing a selector
-      If specificied, the element referenced in this selector (which has to be
-      a parent element of the textarea this is applied to) will be searched
-      for all elements with a class of settings.usernameSelector; the $.text()
-      value of these elements will be added to the searchable list of usernames.
-
-  usernameSelector (default='.username'):
-    description: string containing a selector
-      If settings.containerSelector is specified, this is the class that should
-      be given to usernames within that container.
-
-  xhrUsernames (default=null):
-    description: string (URL)
-      If exists, this URL will be queried. It should return JSON in the
-      following format:
-        { usernames: [ 'username1', 'username2' ... ] }
-      These usernames will be searchable by all textareas using the plugin
-      on that page that also have xhrUsernames specified; the list of
-      usernames will only ever be loaded in once.
-
-  numResults (default=5):
-    description: int
-      The number of results to display in the autocomplete dropdown.
 */
 
 // case insensitive sort
