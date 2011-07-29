@@ -124,12 +124,11 @@ $(document).ready(function() {
     return username_list;
   };
 
-  // remove autocomplete dropdown from conatiner
+  // remove autocomplete dropdown from container
 
   var removeUsernameAutocomplete = function(container) {
     container.find('.at-username-autocomplete').remove();
     container.find('textarea').removeClass('autocomplete_active').removeData('ac_start').scrollTop(9999); // scrollTop to fix Firefox bug
-
     return true;
   };
 
