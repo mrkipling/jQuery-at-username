@@ -157,7 +157,7 @@ $(document).ready(function() {
       if (e.keyCode === 16) { // shift
         return;
 
-      } else if (e.keyCode === 50) { // @
+      } else if (e.keyCode === 50 && e.shiftKey) { // @
         textarea.addClass('autocomplete_active');
 
         if (!textarea.data('ac_start')) {
