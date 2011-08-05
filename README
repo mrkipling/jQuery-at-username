@@ -19,7 +19,7 @@ Settings (optional):
 
   usernameSelector (default='.username'):
     description: string containing a selector
-      If settings.containerSelector is specified, this is the selctor that will
+      If settings.containerSelector is specified, this is the selector that will
       be used to find elements within that container which contain usernames.
 
   xhrUsernames (default=null):
