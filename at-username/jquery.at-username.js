@@ -135,14 +135,9 @@ $(document).ready(function() {
 
     if (settings.xhrUsernames && !$('body').data('loadXhrUsernames')) {
       $('body').data('loadXhrUsernames', true);
-
-      $.ajax({
-        type: 'POST',
-        url: settings.xhrUsernames,
-        success: function(data) {
-          if (data.usernames) {
-            $('body').data('xhrUsernames', data.usernames.join(','));
-          }
+      $.post(settings.xhrUsernames, function(data) {
+        if (data.usernames) {
+          $('body').data('xhrUsernames', data.usernames.join(','));
         }
       });
     }
