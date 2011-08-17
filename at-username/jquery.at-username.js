@@ -149,10 +149,10 @@ $(document).ready(function() {
       var username_list;
       var ddl;
 
-      if (e.keyCode === 16) { // shift
+      if (e.which === 16) { // shift
         return;
 
-      } else if (e.keyCode === 50 && e.shiftKey) { // @
+      } else if (e.which === 50 && e.shiftKey) { // @
         textarea.addClass('autocomplete_active');
 
         if (!textarea.data('ac_start')) {
@@ -174,7 +174,7 @@ $(document).ready(function() {
           $('body').append(username_list);
         }
 
-      } else if (e.keyCode === 38 || e.keyCode === 40 || e.keyCode === 13 || e.keyCode === 32) { // up, down, enter, space
+      } else if (e.which === 38 || e.which === 40 || e.which === 13 || e.which === 32) { // up, down, enter, space
         ddl = $('#at-username-autocomplete');
 
         if (ddl.length === 0) {
@@ -183,7 +183,7 @@ $(document).ready(function() {
 
         var active;
 
-        switch (e.keyCode) {
+        switch (e.which) {
         case 38: // up
           active = ddl.find('li.active');
           if (active.length > 0) {
@@ -212,7 +212,7 @@ $(document).ready(function() {
           return false;
         }
 
-      } else if (e.keyCode === 27) { // ESC
+      } else if (e.which === 27) { // ESC
         removeUsernameAutocomplete(textarea_wrapper);
 
       } else { // any other key
@@ -223,7 +223,7 @@ $(document).ready(function() {
         var ac_start = textarea.data('ac_start');
         var ac_current = textarea.val().length;
 
-        if (e.keyCode === 8) { // backspace
+        if (e.which === 8) { // backspace
           ac_current--;
         }
 
@@ -233,8 +233,8 @@ $(document).ready(function() {
 
         var search_term = textarea.val().substring(ac_start + 1, ac_current);
 
-        if (e.keyCode > 48 && e.keyCode < 90) { // 0-9, a-z
-          search_term += String.fromCharCode(e.keyCode);
+        if (e.which > 48 && e.which < 90) { // 0-9, a-z
+          search_term += String.fromCharCode(e.which);
         }
 
         search_term = search_term.toLowerCase();
