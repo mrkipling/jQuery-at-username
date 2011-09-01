@@ -124,7 +124,8 @@ $(document).ready(function() {
       containerSelector: '.at-username-container',
       usernameSelector: '.username',
       numResults: 5,
-      xhrUsernames: null
+      xhrUsernames: null,
+      xhrOnFocus: true
     };
 
     if (userSettings !== undefined) {
@@ -133,13 +134,23 @@ $(document).ready(function() {
 
     // load in XHR usernames if not already done
 
-    if (settings.xhrUsernames && !$('body').data('loadXhrUsernames')) {
-      $('body').data('loadXhrUsernames', true);
-      $.get(settings.xhrUsernames, function(data) {
-        if (data.usernames) {
-          $('body').data('xhrUsernames', data.usernames.join(','));
+    if (settings.xhrUsernames) {
+
+      var fnLoadXhrUsernames = function() {
+        if (!$('body').data('loadXhrUsernames')) {
+          $('body').data('loadXhrUsernames', true);
+          $.get(settings.xhrUsernames, function(data) {
+            if (data.usernames) {
+              $('body').data('xhrUsernames', data.usernames.join(','));
+            }
+          });
         }
-      });
+      }
+
+      this.live('focus', fnLoadXhrUsernames); // bind to textarea
+      if (!settings.xhrOnFocus) {
+        fnLoadXhrUsernames();
+      }
     }
 
     this.live('keydown', function(e) {

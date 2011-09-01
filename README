@@ -32,6 +32,12 @@ Settings (optional):
       will only ever be loaded in once. For example, you could load in the
       logged-in user's friends list.
 
+  xhrOnFocus (default=true):
+    description: boolean
+      If true (and xhrUsernames is set), xhrUsernames will only be loaded in
+      lazily when the textarea has focus set for the first time. If false, it
+      will be loaded in on page load.
+
   numResults (default=5):
     description: int
       The number of results to display in the autocomplete dropdown.
