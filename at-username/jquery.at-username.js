@@ -10,6 +10,8 @@ Autocomplete usernames when typing @
 
 $(document).ready(function() {
 
+  var loadXhrUsernames = false;
+
   var caseInsensitiveSort = function(a, b) {
     var ret = 0;
     a = a.toLowerCase();
@@ -22,7 +24,7 @@ $(document).ready(function() {
   // get usernames (settings.usernameClass) from a container element, removing duplicates
   // returns an array of strings, sorted alphabetically (case insensitive)
 
-  var getUsernameList = function(container, usernameSelector, loadXhrUsernames) {
+  var getUsernameList = function(container, usernameSelector) {
     var users = [];
 
     // get XHR usernames
@@ -137,8 +139,8 @@ $(document).ready(function() {
     if (settings.xhrUsernames) {
 
       var fnLoadXhrUsernames = function() {
-        if (!$('body').data('loadXhrUsernames')) {
-          $('body').data('loadXhrUsernames', true);
+        if (!loadXhrUsernames) {
+          loadXhrUsernames = true;
           $.get(settings.xhrUsernames, function(data) {
             if (data.usernames) {
               $('body').data('xhrUsernames', data.usernames.join(','));
@@ -170,7 +172,7 @@ $(document).ready(function() {
           textarea.data('ac_start', textarea.val().length);
         }
 
-        var users = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, (settings.xhrUsernames !== null));
+        var users = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector);
 
         if (users.length === 0) {
           return true;
@@ -249,7 +251,7 @@ $(document).ready(function() {
         }
 
         search_term = search_term.toLowerCase();
-        var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, (settings.xhrUsernames !== null));
+        var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector);
         var search_results = searchUsernameList(usernames, search_term);
         username_list = createUsernameAutocomplete(textarea, textarea.closest(settings.containerSelector), search_results, settings.numResults);
         $('#at-username-autocomplete').replaceWith(username_list);
