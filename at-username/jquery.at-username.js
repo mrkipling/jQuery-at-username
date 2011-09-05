@@ -11,6 +11,7 @@ Autocomplete usernames when typing @
 $(document).ready(function() {
 
   var loadXhrUsernames = false;
+  var xhrUsernamesList = null;
 
   var caseInsensitiveSort = function(a, b) {
     var ret = 0;
@@ -29,12 +30,8 @@ $(document).ready(function() {
 
     // get XHR usernames
 
-    if (loadXhrUsernames) {
-      var xhr_usernames_data = $('body').data('xhrUsernames');
-      if (xhr_usernames_data) {
-        var xhr_usernames = xhr_usernames_data.split(',');
-        users = users.concat(xhr_usernames);
-      }
+    if (loadXhrUsernames && xhrUsernamesList !== null) {
+      users = users.concat(xhrUsernamesList);
     }
 
     // search usernames
@@ -143,7 +140,7 @@ $(document).ready(function() {
           loadXhrUsernames = true;
           $.get(settings.xhrUsernames, function(data) {
             if (data.usernames) {
-              $('body').data('xhrUsernames', data.usernames.join(','));
+              xhrUsernamesList = data.usernames;
             }
           });
         }
