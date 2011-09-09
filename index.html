@@ -29,6 +29,8 @@
       blockquote, q { quotes: none; }
       :focus  { outline: 0; }
       table   { border-collapse: collapse; border-spacing: 0; }
+      p       { margin: 10px 0; }
+      code    { background-color: #f3f3f3; border: 1px dotted #ccc; display: block; margin: 10px 0; padding: 10px; }
 
       textarea, input, select
       {
@@ -40,9 +42,10 @@
 
       /* page styling */
 
-      #container { background-color: #fff; width: 800px; padding: 40px; margin: 0 auto; border-radius: 2px; box-shadow: #ccc 2px 2px 5px; }
-      h1     { font-size: 24px; margin-top: -10px; padding-bottom: 5px; }
-      h1 + p { margin-bottom: 10px; padding-bottom: 20px; border-bottom: 1px dotted #ccc; }
+      .container { background-color: #fff; width: 800px; padding: 40px; margin: 40px auto; border-radius: 2px; box-shadow: #ccc 2px 2px 5px; }
+      .container:first-child { margin-top: 20px; }
+      h1     { font-size: 24px; margin-top: -10px; }
+      h1 + p { color: #777; margin-bottom: 10px; padding-bottom: 20px; border-bottom: 1px dotted #ccc; }
       h2     { font-size: 14px; margin: 30px 0 10px; }
       .at-username-container .instructions { margin: -5px 0 15px; }
       .at-username-container .reply { width: 300px; min-height: 200px; }
@@ -93,10 +96,73 @@
   </head>
 
   <body>
-    <div id="container">
+    <div class="container">
 
-      <h1>jQuery at-username plugin example</h1>
-      <p>jQuery plugin which provides Twitter-style autocompletion of usernames in textareas when typing @</p>
+      <h1>jQuery at-username</h1>
+      <p>
+        jQuery plugin which provides Twitter-style autocompletion of usernames in textareas when typing @
+        <span style="margin: 0 3px;">-</span>
+        <a href="https://github.com/mrkipling/jQuery-at-username">Project page on GitHub</a>
+      </p>
+
+      <h2>What does it do?</h2>
+      <p>It's pretty simple really. You use the plugin on a textarea, and when you type @ it pulls up a list of usernames, like so:</p>
+      <img src="https://github.com/mrkipling/jQuery-at-username/raw/master/example/example.png" width="300" height="187" alt="Example screenshot" style="display: block; margin: 20px;">
+      <p>As you type, it refines the list of usernames to match the partial username that you are typing.</p>
+      <p>You clan <a href="#example">play with an example here</a>.</p>
+
+      <h2>Neat, I guess. How do you use it?</h2>
+      <p>Couldn't be simpler:</p>
+      <code>
+        $('textarea').at-username();
+      </code>
+
+      <h2>Where do the usernames come from?</h2>
+      <p>They can come from two places - from the DOM, or returned from an XHR request.</p>
+
+      <h2>How do I define usernames in the DOM?</h2>
+
+      <p>Just layout your HTML like so:</p>
+      <code>
+        &lt;div class="at-username-container"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="username"&gt;username1&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="username"&gt;username2&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;textarea&gt;&lt;/textarea&gt;<br>
+        &lt;/div&gt;
+      </code>
+      <p>The plugin is applied to the textarea (see "how do I use it" above).</p>
+      <p>It then walks up the DOM until it finds the element with the class of "at-username-container". Next, it finds all child elements of the container that have a class of "username", and uses the $.text() value of each.</p>
+      <p>Both of the classes (at-username-container and username) are customisable on a per-textarea basis.</p>
+
+      <h2>How do I fetch usernames using XHR?</h2>
+
+      <p>You need to specify a URL to query:</p>
+      <code>
+        $('textarea').at-username({<br>
+        &nbsp;&nbsp;xhrUsernames: '/url/to/query'<br>
+        });
+      </code>
+      <p>This URL should return JSON in the following format:</p>
+      <code>
+        { usernames: [ 'username1', 'username2' ] }
+      </code>
+
+      <h2>Anything else worth knowing about?</h2>
+      <p>Sure.</p>
+      <ul class="bullets">
+        <li>You can use both methods on the same textarea (DOM and XHR) and it will merge to two sets of usernames into one.</li>
+        <li>If you use the XHR method you can either load the usernames in lazily when the textarea first gets focus, or you can load them in straight away on binding to the textarea.</li>
+        <li>If you select a textarea which uses an XHR URL which has been previously loaded in, the URL won't be hit again - the data is stored locally in the DOM.</li>
+        <li>You can customise how many usernames are displayed in the list.</li>
+      </ul>
+      <p>The README file in the git repo explains in more detail exactly what you can customise and how to do it.</p>
+
+    </div>
+
+    <div id="example" class="container">
+
+      <h1>Example</h1>
+      <p>Ah go on, have a go.</p>
 
       <div class="at-username-container">
 
@@ -143,10 +209,10 @@
       </div>
     </div>
 
-    <div id="footer">
-      <p>Created by <a href="http://www.bradabrahams.co.uk/">Brad Abrahams</a> for <a href="http://www.playfire.com/">Playfire</a></p>
-      <p><a href="https://github.com/mrkipling/jQuery-at-username">Project page on GitHub</a></p>
-    </div>
+    <p id="footer">
+      Created by <a href="http://www.bradabrahams.co.uk/">Brad Abrahams</a> for <a href="http://www.playfire.com/">Playfire</a><br>
+      <a href="https://github.com/mrkipling/jQuery-at-username">Project page on GitHub</a>
+    </p>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script src="https://raw.github.com/mrkipling/jQuery-at-username/master/at-username/jquery.at-username.js"></script>
