@@ -28,15 +28,15 @@ Settings (optional):
       following format:
         { usernames: [ 'username1', 'username2' ... ] }
       These usernames will be searchable by all textareas using the plugin on
-      that page that also have xhrUsernames specified; the list of usernames
-      will only ever be loaded in once. For example, you could load in the
-      logged-in user's friends list.
+      that page that also have the same url specified in xhrUsernames. Each URL
+      will only ever be queried once (see xhrOnFocus to control whether this is
+      done lazily on focus, or on binding to the textarea).
 
   xhrOnFocus (default=true):
     description: boolean
-      If true (and xhrUsernames is set), xhrUsernames will only be loaded in
+      If true (and xhrUsernames is set), the xhrUsernames URL will be loaded
       lazily when the textarea has focus set for the first time. If false, it
-      will be loaded in on page load.
+      will be loaded in straight away on bind.
 
   numResults (default=5):
     description: int
