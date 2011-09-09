@@ -10,8 +10,7 @@ Autocomplete usernames when typing @
 
 $(document).ready(function() {
 
-  var loadXhrUsernames = false;
-  var xhrUsernamesList = null;
+  var xhrUsernamesList = [];
 
   var caseInsensitiveSort = function(a, b) {
     var ret = 0;
@@ -25,13 +24,18 @@ $(document).ready(function() {
   // get usernames (settings.usernameClass) from a container element, removing duplicates
   // returns an array of strings, sorted alphabetically (case insensitive)
 
-  var getUsernameList = function(container, usernameSelector) {
+  var getUsernameList = function(container, usernameSelector, url) {
     var users = [];
 
     // get XHR usernames
 
-    if (loadXhrUsernames && xhrUsernamesList !== null) {
-      users = users.concat(xhrUsernamesList);
+    if (xhrUsernamesList.length > 0) {
+      for (var i = 0; i < xhrUsernamesList.length; i++) {
+        if (xhrUsernamesList[i].url === url) {
+          users = users.concat(xhrUsernamesList[i].usernames);
+          break;
+        }
+      }
     }
 
     // search usernames
@@ -136,15 +140,24 @@ $(document).ready(function() {
     if (settings.xhrUsernames) {
 
       var fnLoadXhrUsernames = function() {
-        if (!loadXhrUsernames) {
-          loadXhrUsernames = true;
+        var loaded = false;
+        for (var i = 0; i < xhrUsernamesList.length; i++) {
+          if (xhrUsernamesList[i].url === settings.xhrUsernames) {
+            loaded = true;
+          }
+        }
+
+        if (!loaded) {
           $.get(settings.xhrUsernames, function(data) {
             if (data.usernames) {
-              xhrUsernamesList = data.usernames;
+              xhrUsernamesList.push({
+                url: settings.xhrUsernames,
+                usernames: data.usernames
+              });
             }
           });
         }
-      }
+      } // fnLoadXhrUsernames()
 
       this.live('focus', fnLoadXhrUsernames); // bind to textarea
       if (!settings.xhrOnFocus) {
@@ -169,7 +182,7 @@ $(document).ready(function() {
           textarea.data('ac_start', textarea.val().length);
         }
 
-        var users = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector);
+        var users = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, settings.xhrUsernames);
 
         if (users.length === 0) {
           return true;
@@ -248,7 +261,7 @@ $(document).ready(function() {
         }
 
         search_term = search_term.toLowerCase();
-        var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector);
+        var usernames = getUsernameList(textarea.closest(settings.containerSelector), settings.usernameSelector, settings.xhrUsernames);
         var search_results = searchUsernameList(usernames, search_term);
         username_list = createUsernameAutocomplete(textarea, textarea.closest(settings.containerSelector), search_results, settings.numResults);
         $('#at-username-autocomplete').replaceWith(username_list);
