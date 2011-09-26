@@ -137,10 +137,11 @@ $(document).ready(function() {
 
     // load in XHR usernames if not already done
 
+    var loaded = false;
+
     if (settings.xhrUsernames) {
 
       var fnLoadXhrUsernames = function() {
-        var loaded = false;
         for (var i = 0; i < xhrUsernamesList.length; i++) {
           if (xhrUsernamesList[i].url === settings.xhrUsernames) {
             loaded = true;
@@ -148,6 +149,7 @@ $(document).ready(function() {
         }
 
         if (!loaded) {
+          loaded = true;
           $.get(settings.xhrUsernames, function(data) {
             if (data.usernames) {
               xhrUsernamesList.push({
